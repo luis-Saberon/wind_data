@@ -8,7 +8,7 @@ folder_path <- "../DJI_Flight_Records/Excel_Flight_Records"
 file_list <- list.files(path = folder_path, pattern = "(?i)\\.xlsx?$", full.names = TRUE)
 
 combined_data <- file_list %>% 
-  map_df(~read_excel(.x))
+  map_df(~read_excel(.x, skip = 1)) # Skip sep="..." line
 
 # 3. Save the final combined dataset as a CSV file
-write_csv(combined_data, "../DJI_Flight_Records/complete_dji_flight_records_csv.csv")
+write_csv(combined_data, "../DJI_Flight_Records/complete_dji_flight_records.csv")
