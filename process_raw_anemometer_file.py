@@ -220,6 +220,7 @@ def process_raw_anemometer_file(raw_file_path,output_file_path,utc_offset=0,
                     ( (start_time % 100) / 86400. )
     
 
+
     if debug_output:
       print('Converted '+str(start_time)+' in HHMMSS to '+str(start_time_EU)+\
             ' in .dddddd')
@@ -228,6 +229,7 @@ def process_raw_anemometer_file(raw_file_path,output_file_path,utc_offset=0,
     end_time_EU = ( ( (end_time // 10000) + utc_offset) / 24.) + \
                   ( ( (end_time % 10000) // 100 ) / 1440.) + \
                   ( ( (end_time % 100) +0.9) / 86400. )
+    
     
     try:
       time_vector = linspace(start_time_EU, end_time_EU,num=end_idx-start_idx+1)
@@ -273,8 +275,17 @@ def process_raw_anemometer_file(raw_file_path,output_file_path,utc_offset=0,
   
   # write data_out to file and we're done
   with open(output_file_path,'w') as openfile:
+
+    #write field headers
+    openfile.write("decimalTime,dateTime,uWind (E-W),vWind (N-S),wWind (Vert),Temp,speedOfSound\n")
     for record in range(len(data_out)):
-      openfile.write(data_out[record])
+      
+      #very hack way to fix formatting
+      replaced = data_out[record].replace(',', " ")
+      replaced = replaced.replace("   ", "")
+      replaced = replaced.replace('  ', " ")
+      replaced = replaced.replace(' ', ",")
+      openfile.write(replaced)
   
 
 ##################################################################################
@@ -295,5 +306,6 @@ if __name__ == '__main__':
   #   process_raw_anemometer_file(raw_anemometer_file,output_filename,
   #                               utc_offset=UTC_offset,debug_output=DEBUG_output)
 
-  process_raw_anemometer_file("GV214130.CSV", "output_anemometer.csv", utc_offset=UTC_offset, debug_output=DEBUG_output)
+  process_raw_anemometer_file("GR000000.CSV", "output_anemometer.csv", utc_offset=UTC_offset, debug_output=DEBUG_output)
+  # process_raw_anemometer_file("GV214130.CSV", "output_anemometer.csv", utc_offset=UTC_offset, debug_output=DEBUG_output)
   
