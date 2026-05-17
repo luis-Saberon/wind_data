@@ -1,7 +1,7 @@
 library(tidyverse)
 
 # 1. Load your local combined dataset
-flight_data <- read_csv("../DJI_Flight_Records/complete_dji_flight_records_csv.csv")
+flight_data <- read_csv("../DJI_Flight_Records/complete_dji_flight_records.csv")
 
 print(names(flight_data), max = 300)
 
@@ -36,7 +36,7 @@ cleaned_flight_data <- flight_data %>%
     pilot_rudder   = `RC.rudder`,
   ) %>% 
   # Drop rows where wind speed
-  filter(!is.na(wind_speed_mph), !is.na(dir_of_travel))
+  filter(!is.na(wind_speed_mph))
 
 write_csv(cleaned_flight_data, "../DJI_Flight_Records/complete_cleaned_dji_flight_records.csv")
 # 3. Peek at the clean dataframe
