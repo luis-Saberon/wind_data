@@ -244,7 +244,9 @@ def process_raw_anemometer_file(raw_file_path,output_file_path,utc_offset=0,
       
       if EU_delta < idx_delta + 3: 
         for record_idx in range(end_idx-start_idx+1):
-          data_out.append(str(round(time_vector[record_idx],6))+','+
+          # data_out.append(str(round(time_vector[record_idx],10)).format+','+
+          #                 raw_data[start_idx+record_idx])
+          data_out.append("{:.7f}".format(time_vector[record_idx])+','+
                           raw_data[start_idx+record_idx])
       else:
         if debug_output:
@@ -281,8 +283,9 @@ def process_raw_anemometer_file(raw_file_path,output_file_path,utc_offset=0,
     for record in range(len(data_out)):
       
       #very hack way to fix formatting
-      replaced = data_out[record].replace(',', " ")
-      replaced = replaced.replace("   ", "")
+      replaced = data_out[record]
+      replaced = replaced.replace(',', " ")
+      replaced = replaced.replace("   ", " ")
       replaced = replaced.replace('  ', " ")
       replaced = replaced.replace(' ', ",")
       openfile.write(replaced)

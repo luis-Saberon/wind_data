@@ -3,3 +3,5 @@ simple_output.csv
 DJI_Flight_Records/complete_dji_flight_records.csv
 DJI_Flight_Records/complete_cleaned_dji_flight_records.csv
 DJI_Flight_Records/complete_cleaned_dji_flight_records.xls
+R_Scripts/.RData
+R_Scripts/.Rhistory
