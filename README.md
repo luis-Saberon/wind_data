@@ -12,3 +12,8 @@ The output for the raw anemometer file is time(HHMMSS), UVW Values(m/s), Sonic T
 
 File format for the processed data is just the time displayed as a decimal format + the default format
 UVW wind components represent a 3D wind velocity vector, where U is the zonal (east-west) speed, V is the meridional (north-south) speed, and W is the vertical speed
+
+RUN RSTUDIO SCRIPTS: 
+1. Ensure you've installed all the appropriate libraries.
+2. Set Session Working Directory to Source File Location.
+3. Run Scripts 1 + 2 before any other scripts.
